@@ -6,7 +6,7 @@ var config = require('./config.json');
 
 console.log("Connection String:"+config.connectionString);
 console.log("Device ID:"+config.deviceId);
-
+var deviceId = config.deviceId;
 
 var connectionString = config.connectionString;
 var client = clientFromConnectionString(connectionString);
@@ -30,7 +30,7 @@ var connectCallback = function (err) {
         var humidity = 60 + (Math.random() * 20);  
 	var dt = dateTime.create();
 	var formatted = dt.format('Y-m-d H:M:S');          
-        var data = JSON.stringify({ deviceId: 'D0001', temperature: temperature, humidity: humidity, timestamp:formatted });
+        var data = JSON.stringify({ deviceId: deviceId, temperature: temperature, humidity: humidity, timestamp:formatted });
         var message = new Message(data);
         message.properties.add('temperatureAlert', (temperature > 30) ? 'true' : 'false');
         console.log("Sending message: " + message.getData());
