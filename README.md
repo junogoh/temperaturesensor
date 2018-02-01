@@ -1,6 +1,12 @@
 # temperaturesensor
 A sample Azure IoT Edge module that periodically sends simulated deviceID, temperature, humidity readings and timestamp to Azure IoT Hub.
 
+Install required packages.
+
+    npm install azure-iot-device azure-iot-device-mqtt@latest --save
+    npm install node-datetime --save
+    npm install minimist --save
+    
 Replace your device id and connection string in config.json file.
 
     {
