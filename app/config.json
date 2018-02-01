@@ -1,0 +1,4 @@
+{
+	"deviceId" : "D0001",
+	"connectionString" : "HostName=yourhost.azure-devices.net;DeviceId=D0001;SharedAccessKey=yourSharedAccessKey"
+}
