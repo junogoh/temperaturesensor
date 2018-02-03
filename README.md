@@ -7,13 +7,6 @@ Install required packages.
     npm install node-datetime --save
     npm install minimist --save
     
-Replace your device id and connection string in config.json file.
-
-    {
-        "deviceId" : "D0001",
-        "connectionString" : "HostName=yourhost.azure-devices.net;DeviceId=D0001;SharedAccessKey=yourshareaccesskey"
-    }
-
 Now start to program to send the messages to Azure IoT Hub.
 
     node index.js
