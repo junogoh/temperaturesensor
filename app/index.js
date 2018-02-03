@@ -2,13 +2,22 @@
 var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
 var dateTime = require('node-datetime');
-var config = require('./config.json');
+var config = require('/etc/azure-iot-edge/config.json');
+var deviceId = "";
 
-console.log("Connection String:"+config.connectionString);
-console.log("Device ID:"+config.deviceId);
-var deviceId = config.deviceId;
+console.log("Connection String:"+config.deviceConnectionString);
 
-var connectionString = config.connectionString;
+var dcsArray = config.deviceConnectionString.split(";");
+for(var i = 0; i < dcsArray.length; i++){
+	if (dcsArray[i].startsWith("DeviceId=")){
+	deviceId = dcsArray[i].replace("DeviceId=","");
+	}
+}
+
+console.log("DeviceID:"+deviceId);
+
+
+var connectionString = config.deviceConnectionString;
 var client = clientFromConnectionString(connectionString);
 
 function printResultFor(op) {
