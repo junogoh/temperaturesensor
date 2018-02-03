@@ -2,22 +2,8 @@
 var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
 var dateTime = require('node-datetime');
-var config = require('/etc/azure-iot-edge/config.json');
-var deviceId = "";
-
-console.log("Connection String:"+config.deviceConnectionString);
-
-var dcsArray = config.deviceConnectionString.split(";");
-for(var i = 0; i < dcsArray.length; i++){
-	if (dcsArray[i].startsWith("DeviceId=")){
-	deviceId = dcsArray[i].replace("DeviceId=","");
-	}
-}
-
-console.log("DeviceID:"+deviceId);
-
-
-var connectionString = config.deviceConnectionString;
+var deviceId = "D0001";
+var connectionString = "HostName=yourhost.azure-devices.net;DeviceId=D0001;SharedAccessKey=yoursharedaccesskey";
 var client = clientFromConnectionString(connectionString);
 
 function printResultFor(op) {
@@ -39,12 +25,12 @@ var connectCallback = function (err) {
         var humidity = 60 + (Math.random() * 20);  
 	var dt = dateTime.create();
 	var formatted = dt.format('Y-m-d H:M:S');          
-        var data = JSON.stringify({ deviceId: deviceId, sensor: 'temperature', temperature: temperature, humidity: humidity, timestamp:formatted });
+        var data = JSON.stringify({ deviceId: deviceId, message: 'test', sensor: 'temperature', temperature: temperature, humidity: humidity, timestamp:formatted });
         var message = new Message(data);
         message.properties.add('temperatureAlert', (temperature > 30) ? 'true' : 'false');
         console.log("Sending message: " + message.getData());
         client.sendEvent(message, printResultFor('send'));
-    }, 10000);
+    }, 5000);
   }
 };
 
